@@ -36,7 +36,10 @@ Rules for answering with these tools:
 - Always mention the source: "{ATTRIBUTION}".
 
 Wiki ids: rocketleague, leagueoflegends (verified); other Liquipedia wikis may work.
-Tiers: 1=S, 2=A, 3=B, 4=C, 5=D.
+Tiers: 1=S, 2=A, 3=B, 4=C, 5=D. Tier filters leave out unranked events and, by default,
+qualifiers, showmatches and weekly/monthly cups.
+- Many matches of one tournament stage on the same day without a known time are summarised
+  in one line ("16 matches on 2026-10-20, times not announced yet"); do not invent times.
 """
 
 _READ_ONLY = ToolAnnotations(read_only_hint=True, idempotent_hint=True, open_world_hint=True)
@@ -60,7 +63,16 @@ MaxTier = Annotated[
         le=5,
         description=(
             "Only used without team/tournament: include tiers 1..max_tier "
-            "(1=S only, 2=S+A, ...). Default 1."
+            "(1=S only, 2=S+A, ...). Default 1. Unranked events are never included."
+        ),
+    ),
+]
+IncludeMinorTypes = Annotated[
+    bool,
+    Field(
+        description=(
+            "Only used with the tier filter: also include qualifiers, showmatches and "
+            "weekly/monthly/misc events. Default false."
         ),
     ),
 ]
@@ -96,7 +108,8 @@ def build_server(client: LiquipediaClient) -> MCPServer:
             "Finished matches, newest first, with the series score, the winner by name and "
             "the score of every single game (e.g. 3–2 OT), so you can tell close series from "
             "one-sided ones. Filter by team and/or exact tournament name; without either, only "
-            "top-tier matches (max_tier) are returned. With 3 matches or fewer, League of "
+            "top-tier matches (max_tier, no qualifiers/showmatches unless "
+            "include_minor_types) are returned. With 3 matches or fewer, League of "
             "Legends champion picks and MVPs are included. Read each line on its own and do "
             "not invent totals. Cite Liquipedia as the source."
         ),
@@ -106,11 +119,18 @@ def build_server(client: LiquipediaClient) -> MCPServer:
         team: Team = None,
         tournament: Tournament = None,
         max_tier: MaxTier = 1,
+        include_minor_types: IncludeMinorTypes = False,
         limit: Annotated[int, Field(ge=1, le=50, description="Number of matches.")] = 5,
     ) -> CallToolResult:
         return await _run(
             lambda: matches.get_results(
-                client, wiki, team=team, tournament=tournament, max_tier=max_tier, limit=limit
+                client,
+                wiki,
+                team=team,
+                tournament=tournament,
+                max_tier=max_tier,
+                include_minor_types=include_minor_types,
+                limit=limit,
             ),
             fmt.format_match_list,
         )
@@ -121,7 +141,8 @@ def build_server(client: LiquipediaClient) -> MCPServer:
         description=(
             "Scheduled matches from now on, soonest first (times in UTC; 'time TBA' when only "
             "the day is known). Filter by team and/or exact tournament; without either, only "
-            "top-tier matches (max_tier). These matches have no result yet: never present "
+            "top-tier matches (max_tier, no qualifiers/showmatches unless "
+            "include_minor_types). These matches have no result yet: never present "
             "them with a score. Pairings with undetermined (TBD) opponents are left out. Cite "
             "Liquipedia as the source."
         ),
@@ -131,11 +152,18 @@ def build_server(client: LiquipediaClient) -> MCPServer:
         team: Team = None,
         tournament: Tournament = None,
         max_tier: MaxTier = 1,
+        include_minor_types: IncludeMinorTypes = False,
         limit: Annotated[int, Field(ge=1, le=50, description="Number of matches.")] = 10,
     ) -> CallToolResult:
         return await _run(
             lambda: matches.get_upcoming(
-                client, wiki, team=team, tournament=tournament, max_tier=max_tier, limit=limit
+                client,
+                wiki,
+                team=team,
+                tournament=tournament,
+                max_tier=max_tier,
+                include_minor_types=include_minor_types,
+                limit=limit,
             ),
             fmt.format_match_list,
         )
@@ -148,7 +176,12 @@ def build_server(client: LiquipediaClient) -> MCPServer:
             "for one or more wikis in a single request – e.g. 'what's on this weekend' or "
             "'what happened yesterday'. Finished matches show score and winner; the others are "
             "marked 'not played yet' and have no score. Without a team only top-tier matches "
-            "(max_tier) are returned. Cite Liquipedia as the source."
+            "(max_tier, no qualifiers/showmatches unless include_minor_types) are returned. "
+            "Matches whose time is not announced count as whole days: they are included only "
+            "if their UTC day lies fully inside the range (or the range inside that day), and "
+            "many of them are summarised per tournament stage. Up to 50 matches with a known "
+            "time are listed; the text says when the list was cut off. Cite Liquipedia as "
+            "the source."
         ),
     )
     async def get_matches_between(
@@ -162,11 +195,18 @@ def build_server(client: LiquipediaClient) -> MCPServer:
         start_utc: Annotated[str, Field(description="ISO 8601 start, e.g. 2026-10-24T00:00Z.")],
         end_utc: Annotated[str, Field(description="ISO 8601 end, e.g. 2026-10-26T00:00Z.")],
         max_tier: MaxTier = 1,
+        include_minor_types: IncludeMinorTypes = False,
         team: Team = None,
     ) -> CallToolResult:
         return await _run(
             lambda: matches.get_matches_between(
-                client, wikis, start_utc, end_utc, max_tier=max_tier, team=team
+                client,
+                wikis,
+                start_utc,
+                end_utc,
+                max_tier=max_tier,
+                include_minor_types=include_minor_types,
+                team=team,
             ),
             fmt.format_match_list,
         )

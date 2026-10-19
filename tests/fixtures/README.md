@@ -15,4 +15,6 @@ edge cases:
 | `lol_team_full_table.json` | the full league table, several rounds per team, shuffled |
 | `lol_worlds_not_started_*.json` | a table before the first match (all 0–0, placements 1..n, `currentstatus` "down") |
 | `lol_swiss_bo1_entries.json` | Bo1 Swiss stage with game records stuck at 0–0 |
+| `rl_tier_mixed.json` | tier `"-1"` (unranked) and `""` matches, a tier-1 `Showmatch`, real S-Tier results |
+| `mixed_date_only.json` | 30 day-only (`dateexact=0`, `00:00:00`) FIFAe matches in two groups plus 3 exact LoL matches, two wikis |
 | `rl_tournament_*.json` | tournament lookup with two groups and all `definitestatus` values |

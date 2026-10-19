@@ -6,6 +6,7 @@ Applications that want another language or layout should format the dataclasses 
 
 from __future__ import annotations
 
+from collections import Counter
 from datetime import datetime
 
 from liquipedia_mcp.models import (
@@ -18,6 +19,10 @@ from liquipedia_mcp.models import (
     StandingsGroup,
     StandingsResult,
 )
+
+MAX_LISTED_DATE_ONLY = 5
+"""Unplayed day-only matches of one tournament section and day are listed one by one up
+to this many; more are summarised in a single line."""
 
 WIKI_NAMES = {
     "rocketleague": "Rocket League",
@@ -39,12 +44,31 @@ def _when(date: datetime | None, exact: bool) -> str:
     return f"{date:%Y-%m-%d %H:%M} UTC"
 
 
-def _tier_filter(max_tier: int | None) -> str | None:
+def _tier_filter(max_tier: int | None, include_minor_types: bool = True) -> str | None:
     if max_tier is None:
         return None
-    if max_tier == 1:
-        return "S-Tier only"
-    return f"S-Tier to {TIER_NAMES[max_tier]}"
+    text = "S-Tier only" if max_tier == 1 else f"S-Tier to {TIER_NAMES[max_tier]}"
+    if not include_minor_types:
+        text += ", without qualifiers/showmatches/weeklies"
+    return text
+
+
+_GroupKey = tuple[str | None, str, str | None, str | None]
+
+
+def _date_only_key(match: Match) -> _GroupKey | None:
+    """Grouping key for unplayed day-only matches; ``None`` for everything else."""
+    if match.finished or match.date_exact or not match.day:
+        return None
+    return (match.wiki, match.tournament, match.section, match.day)
+
+
+def _date_only_summary(key: _GroupKey, count: int, show_wiki: bool) -> str:
+    wiki, tournament, section, day = key
+    name = f"{tournament} – {section}" if section else tournament
+    if show_wiki and wiki:
+        name += f" ({wiki_name(wiki)})"
+    return f"{name}: {count} matches on {day}, times not announced yet"
 
 
 def _game(game: Game) -> str:
@@ -112,7 +136,7 @@ def format_match_list(result: MatchList) -> str:
     filters = [
         f"team: {result.team}" if result.team else None,
         f"tournament: {result.tournament}" if result.tournament else None,
-        _tier_filter(result.max_tier),
+        _tier_filter(result.max_tier, result.include_minor_types),
     ]
     header = f"{title} – {wikis}"
     shown = [f for f in filters if f]
@@ -125,8 +149,33 @@ def format_match_list(result: MatchList) -> str:
     if not result.matches:
         lines.append("No matches found.")
     show_wiki = len(result.wikis) > 1
-    for i, match in enumerate(result.matches, start=1):
-        lines.append(format_match(match, i, show_wiki))
+    groups = Counter(k for k in map(_date_only_key, result.matches) if k)
+    summarised: set[_GroupKey] = set()
+    number = 0
+    for match in result.matches:
+        key = _date_only_key(match)
+        if key and groups[key] > MAX_LISTED_DATE_ONLY:
+            if key in summarised:
+                continue
+            summarised.add(key)
+            number += 1
+            lines.append(f"{number}. {_date_only_summary(key, groups[key], show_wiki)}")
+            continue
+        number += 1
+        lines.append(format_match(match, number, show_wiki))
+    if result.truncated:
+        if result.truncated_count:
+            more = f"… and {result.truncated_count} more"
+            if result.truncated_more:
+                more = f"… and at least {result.truncated_count} more"
+        else:
+            more = "… and possibly more"
+        lines.append(f"{more} (list cut off; narrow the time range or filters to see all).")
+    if result.omitted_date_only:
+        lines.append(
+            f"({result.omitted_date_only} match(es) with only a date and no time on days "
+            "partly outside the range were left out; query whole UTC days to include them.)"
+        )
     if result.omitted_tbd:
         lines.append(
             f"({result.omitted_tbd} match(es) with opponents not determined yet were left out.)"

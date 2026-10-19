@@ -11,6 +11,13 @@ Query rules (verified against real LPDB answers for rocketleague and leagueofleg
 * Without a tier filter, C/D-tier leagues dominate. Queries without a team or
   tournament therefore default to ``max_tier=1`` (S-Tier). Team/tournament queries use
   no tier filter.
+* The tier filter lists the wanted tiers explicitly (``([[liquipediatier::1]] OR
+  [[liquipediatier::2]])``): ``liquipediatier`` is ``-1`` for unranked/misc events, which
+  ``[[liquipediatier::<2]]`` let through. Tier filters also drop minor tier types
+  (qualifiers, showmatches, weeklies, ...) unless ``include_minor_types=True``. Both rules
+  are re-checked client-side after parsing.
+* ``dateexact=0`` matches only have a day; their ``date`` is a 00:00 placeholder. Time
+  ranges treat them as whole days (see :func:`get_matches_between`).
 * Unplayed scores are ``-1`` placeholders and never reported as results; matches with
   an undetermined opponent ("TBD") are left out and counted in ``omitted_tbd``.
 """
@@ -49,6 +56,23 @@ MATCH_FIELDS = (
     "match2games,match2bracketdata"
 )
 MAX_MATCHES = 50
+DATE_ONLY_LIMIT = 200
+"""Time ranges return at most this many day-only matches, on top of the exact ones."""
+RANGE_REQUEST_LIMIT = 500
+"""Rows requested for a time range; day-only matches can fill a window quickly."""
+MINOR_TIER_TYPES = (
+    "Qualifier",
+    "Showmatch",
+    "Misc",
+    "Monthly",
+    "Weekly",
+    "Biweekly",
+    "Daily",
+    "Charity",
+)
+"""``liquipediatiertype`` values left out of tier-filtered queries by default. An empty
+tier type means a regular tournament."""
+_MINOR_TYPES_FOLDED = {t.casefold() for t in MINOR_TIER_TYPES}
 PICKS_MAX_MATCHES = 3
 """Champion picks are large; they are only included for this many matches or fewer."""
 MAX_RANGE = timedelta(days=31)
@@ -204,10 +228,11 @@ def parse_match(
                 games.append(game)
 
     tier = to_int(row.get("liquipediatier"))
+    date = parse_date(row.get("date"))
     return Match(
         wiki=to_str(row.get("wiki")) or wiki,
         tournament=to_str(row.get("tournament")) or "Unknown tournament",
-        date=parse_date(row.get("date")),
+        date=date,
         date_exact=to_bool(row.get("dateexact")),
         opponent1=op1,
         opponent2=op2,
@@ -222,7 +247,19 @@ def parse_match(
         status=to_str(row.get("status")),
         games=games,
         mvp=_mvp(to_dict(row.get("extradata"))) if finished else None,
+        day=f"{date:%Y-%m-%d}" if date else None,
     )
+
+
+def in_tier_scope(row: dict[str, Any], max_tier: int, include_minor_types: bool = False) -> bool:
+    """Client-side check of the tier filter: tier 1..``max_tier`` (``-1``, ``""`` and
+    missing tiers fail) and, unless ``include_minor_types``, no minor tier type."""
+    tier = to_int(row.get("liquipediatier"))
+    if tier is None or not 1 <= tier <= max_tier:
+        return False
+    if include_minor_types:
+        return True
+    return (to_str(row.get("liquipediatiertype")) or "").casefold() not in _MINOR_TYPES_FOLDED
 
 
 def parse_matches(
@@ -230,18 +267,24 @@ def parse_matches(
     wiki: str | None,
     limit: int,
     include_picks: bool | None = None,
+    *,
+    max_tier: int | None = None,
+    include_minor_types: bool = True,
 ) -> tuple[list[Match], int, bool]:
     """Parse rows in order, skip TBD pairings, stop at ``limit``.
 
     Returns ``(matches, omitted_tbd, includes_picks)``. ``omitted_tbd`` only counts TBD
     rows that fall inside the returned window. With ``include_picks=None`` champion
     picks are included when at most :data:`PICKS_MAX_MATCHES` matches are returned.
+    With ``max_tier`` set, rows outside :func:`in_tier_scope` are dropped silently.
     """
     kept: list[tuple[dict[str, Any], Match]] = []
     omitted = 0
     for row in rows:
         if len(kept) >= limit:
             break
+        if max_tier is not None and not in_tier_scope(row, max_tier, include_minor_types):
+            continue
         match = parse_match(row, wiki)
         if match is None:
             omitted += 1
@@ -261,8 +304,26 @@ def _conditions(*parts: str | None) -> str:
     return " AND ".join(p for p in parts if p)
 
 
+def tier_conditions(max_tier: int, include_minor_types: bool = False) -> list[str]:
+    """LPDB conditions for tiers 1..``max_tier``, e.g.
+    ``([[liquipediatier::1]] OR [[liquipediatier::2]])``.
+
+    The tiers are listed one by one instead of ``[[liquipediatier::<3]]``, which also
+    matches ``-1`` (unranked) and depends on how LPDB compares the stored string.
+    """
+    max_tier = validate_tier(max_tier)
+    tiers = [f"[[liquipediatier::{t}]]" for t in range(1, max_tier + 1)]
+    parts = [tiers[0] if len(tiers) == 1 else f"({' OR '.join(tiers)})"]
+    if not include_minor_types:
+        parts += [f"[[liquipediatiertype::!{t}]]" for t in MINOR_TIER_TYPES]
+    return parts
+
+
 def _scope(
-    team: str | None, tournament: str | None, max_tier: int | None
+    team: str | None,
+    tournament: str | None,
+    max_tier: int | None,
+    include_minor_types: bool = False,
 ) -> tuple[str | None, str | None, int | None, list[str]]:
     """Validate filters; apply the tier filter only to general (team-less) queries."""
     team = validate_name(team, "team") if team else None
@@ -275,7 +336,7 @@ def _scope(
     tier: int | None = None
     if not team and not tournament:
         tier = validate_tier(1 if max_tier is None else max_tier)
-        parts.append(f"[[liquipediatier::<{tier + 1}]]")
+        parts += tier_conditions(tier, include_minor_types)
     return team, tournament, tier, parts
 
 
@@ -290,21 +351,25 @@ async def get_results(
     team: str | None = None,
     tournament: str | None = None,
     max_tier: int | None = None,
+    include_minor_types: bool = False,
     limit: int = 10,
 ) -> MatchList:
     """Finished matches, newest first (``[[finished::1]]``, ``date DESC``)."""
     wiki = validate_wiki(wiki)
     limit = clamp(limit, 1, MAX_MATCHES)
-    team, tournament, tier, parts = _scope(team, tournament, max_tier)
+    team, tournament, tier, parts = _scope(team, tournament, max_tier, include_minor_types)
     rows = await client.query(
         "match",
         wiki,
         conditions=_conditions("[[finished::1]]", *parts),
         fields=MATCH_FIELDS,
         order="date DESC",
-        limit=limit,
+        # With a tier filter, over-fetch so the client-side tier check can't empty the list.
+        limit=limit if tier is None else min(limit * 2 + 10, 200),
     )
-    matches, omitted, picks = parse_matches(rows, wiki, limit)
+    matches, omitted, picks = parse_matches(
+        rows, wiki, limit, max_tier=tier, include_minor_types=include_minor_types
+    )
     return MatchList(
         kind="results",
         wikis=[wiki],
@@ -312,6 +377,7 @@ async def get_results(
         team=team,
         tournament=tournament,
         max_tier=tier,
+        include_minor_types=include_minor_types or tier is None,
         omitted_tbd=omitted,
         includes_picks=picks,
     )
@@ -324,13 +390,14 @@ async def get_upcoming(
     team: str | None = None,
     tournament: str | None = None,
     max_tier: int | None = None,
+    include_minor_types: bool = False,
     limit: int = 10,
     now: datetime | None = None,
 ) -> MatchList:
     """Scheduled matches after ``now``, soonest first (``[[finished::0]]``, ``date ASC``)."""
     wiki = validate_wiki(wiki)
     limit = clamp(limit, 1, MAX_MATCHES)
-    team, tournament, tier, parts = _scope(team, tournament, max_tier)
+    team, tournament, tier, parts = _scope(team, tournament, max_tier, include_minor_types)
     start = _now(now)
     rows = await client.query(
         "match",
@@ -341,7 +408,14 @@ async def get_upcoming(
         # Over-fetch so that dropping TBD pairings still leaves `limit` matches.
         limit=min(limit * 2 + 10, 200),
     )
-    matches, omitted, _ = parse_matches(rows, wiki, limit, include_picks=False)
+    matches, omitted, _ = parse_matches(
+        rows,
+        wiki,
+        limit,
+        include_picks=False,
+        max_tier=tier,
+        include_minor_types=include_minor_types,
+    )
     return MatchList(
         kind="upcoming",
         wikis=[wiki],
@@ -349,9 +423,24 @@ async def get_upcoming(
         team=team,
         tournament=tournament,
         max_tier=tier,
+        include_minor_types=include_minor_types or tier is None,
         start=start,
         omitted_tbd=omitted,
     )
+
+
+def date_only_in_range(day_start: datetime, start: datetime, end: datetime) -> bool:
+    """Whether a day-only match on the UTC day beginning at ``day_start`` belongs in
+    ``[start, end]``.
+
+    Rule: the whole UTC day lies inside the range (e.g. 00:00 to 00:00 of the next day),
+    or the range lies inside that single day (e.g. 08:00 to 20:00 of it). A range that
+    only touches part of the day (e.g. 13:35 to 01:35 the next day) leaves the day's
+    day-only matches out, since their time could be anywhere in that day.
+    """
+    day_start = day_start.replace(hour=0, minute=0, second=0, microsecond=0)
+    day_end = day_start + timedelta(days=1)
+    return (start <= day_start and day_end <= end) or (day_start <= start and end <= day_end)
 
 
 async def get_matches_between(
@@ -361,11 +450,20 @@ async def get_matches_between(
     end_utc: str | datetime,
     *,
     max_tier: int | None = None,
+    include_minor_types: bool = False,
     team: str | None = None,
     limit: int = MAX_MATCHES,
+    date_only_limit: int = DATE_ONLY_LIMIT,
 ) -> MatchList:
     """All matches (played or not) in ``[start, end]``, chronological, several wikis in
-    one request. Finished ones carry scores; others are listed as scheduled."""
+    one request. Finished ones carry scores; others are listed as scheduled.
+
+    Matches with an exact time are kept when they start inside the range. Day-only
+    matches (``dateexact=0``) follow :func:`date_only_in_range`; the others are counted
+    in ``omitted_date_only``. Exact and day-only matches are limited separately
+    (``limit`` and ``date_only_limit``), so a flood of day-only matches never pushes out
+    exact ones; anything cut off sets ``truncated`` and ``truncated_count``.
+    """
     wiki_list = validate_wikis(wikis)
     start, end = parse_utc(start_utc, "start_utc"), parse_utc(end_utc, "end_utc")
     if end <= start:
@@ -373,29 +471,62 @@ async def get_matches_between(
     if end - start > MAX_RANGE:
         raise InvalidInputError("The time range may span at most 31 days.")
     limit = clamp(limit, 1, MAX_MATCHES * 4)
-    team, _, tier, parts = _scope(team, None, max_tier)
+    date_only_limit = clamp(date_only_limit, 0, DATE_ONLY_LIMIT)
+    team, _, tier, parts = _scope(team, None, max_tier, include_minor_types)
     rows = await client.query(
         "match",
         wiki_list,
         conditions=_conditions(
-            f"[[date::>{lpdb_datetime(start)}]]", f"[[date::<{lpdb_datetime(end)}]]", *parts
+            # One second earlier: day-only matches of the first day sit exactly at 00:00.
+            f"[[date::>{lpdb_datetime(start - timedelta(seconds=1))}]]",
+            f"[[date::<{lpdb_datetime(end)}]]",
+            *parts,
         ),
         fields=MATCH_FIELDS,
         order="date ASC",
-        limit=min(limit * 2 + 10, 500),
+        # One request either way; fetch generously and cut client-side.
+        limit=RANGE_REQUEST_LIMIT,
         ttl=RANGE_TTL,
     )
     single = wiki_list[0] if len(wiki_list) == 1 else None
-    matches, omitted, _ = parse_matches(rows, single, limit, include_picks=False)
+    parsed, omitted, _ = parse_matches(
+        rows,
+        single,
+        len(rows),
+        include_picks=False,
+        max_tier=tier,
+        include_minor_types=include_minor_types,
+    )
+    exact: list[Match] = []
+    date_only: list[Match] = []
+    omitted_date_only = 0
+    for match in parsed:
+        if match.date is None:
+            continue
+        if match.date_exact:
+            if start <= match.date <= end:
+                exact.append(match)
+        elif date_only_in_range(match.date, start, end):
+            date_only.append(match)
+        else:
+            omitted_date_only += 1
+    cut = max(len(exact) - limit, 0) + max(len(date_only) - date_only_limit, 0)
+    more = len(rows) >= RANGE_REQUEST_LIMIT
+    kept = sorted(exact[:limit] + date_only[:date_only_limit], key=lambda m: m.date or start)
     return MatchList(
         kind="between",
         wikis=wiki_list,
-        matches=matches,
+        matches=kept,
         team=team,
         max_tier=tier,
+        include_minor_types=include_minor_types or tier is None,
         start=start,
         end=end,
         omitted_tbd=omitted,
+        omitted_date_only=omitted_date_only,
+        truncated=bool(cut) or more,
+        truncated_count=cut,
+        truncated_more=more,
     )
 
 

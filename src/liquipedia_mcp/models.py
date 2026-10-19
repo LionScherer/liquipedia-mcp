@@ -83,7 +83,8 @@ class Match(_Serializable):
     wiki: str | None
     tournament: str
     date: datetime | None
-    """UTC kickoff."""
+    """UTC kickoff. When ``date_exact`` is False only the day is known and the time
+    (usually 00:00) is a placeholder: use ``day`` instead."""
     date_exact: bool
     """False when only the day is known."""
     opponent1: Opponent
@@ -103,6 +104,9 @@ class Match(_Serializable):
     games: list[Game] = field(default_factory=list)
     mvp: str | None = None
     """E.g. "Faker (Game 1+2), Zeus (Game 3)" (League of Legends)."""
+    day: str | None = None
+    """UTC calendar day of ``date`` ("2026-10-20"); the only meaningful part of
+    day-only (``date_exact=False``) matches."""
 
     @property
     def score_line(self) -> str | None:
@@ -128,6 +132,18 @@ class MatchList(_Serializable):
     end: datetime | None = None
     omitted_tbd: int = 0
     """Matches left out because an opponent is not determined yet."""
+    include_minor_types: bool = True
+    """False when qualifiers, showmatches, weeklies etc. were filtered out (general
+    queries with a tier filter only)."""
+    omitted_date_only: int = 0
+    """Day-only matches left out of a time range because their day is only partly
+    inside it (see :func:`~liquipedia_mcp.matches.get_matches_between`)."""
+    truncated: bool = False
+    """True when more matches matched than are returned."""
+    truncated_count: int = 0
+    """How many matches were cut off (a lower bound when ``truncated_more`` is set)."""
+    truncated_more: bool = False
+    """The API answer itself hit the request limit, so even more matches may exist."""
     includes_picks: bool = False
     source: Source = field(default_factory=Source)
 

@@ -15,7 +15,10 @@ def test_results_text(api, client):
     api.add("match", "rl_results.json")
     text = fmt.format_match_list(run(matches.get_results(client, "rocketleague", limit=3)))
     print(text)
-    assert text.startswith("Latest results – Rocket League (S-Tier only), newest first:")
+    assert text.startswith(
+        "Latest results – Rocket League "
+        "(S-Tier only, without qualifiers/showmatches/weeklies), newest first:"
+    )
     assert "Result: Team Falcons 4–1 Karmine Corp. Winner: Team Falcons." in text
     assert "Games (Team Falcons–Karmine Corp): G1 1–0 (OT, DFH Stadium, 6:21)" in text
     assert "Playoffs, Grand Final" in text
@@ -51,7 +54,7 @@ def test_empty_list_text(api, client):
     api.add("match", {"result": []})
     text = fmt.format_match_list(run(matches.get_results(client, "dota2", max_tier=2)))
     assert "No matches found." in text
-    assert "(S-Tier to A-Tier)" in text
+    assert "(S-Tier to A-Tier, without qualifiers/showmatches/weeklies)" in text
     assert "dota2" in text
 
 
@@ -112,3 +115,56 @@ def test_standings_not_found_text(api, client):
     )
     assert "No standings table found" in text
     assert ATTRIBUTION in text
+
+
+def test_tier_minus_one_never_listed_as_s_tier(api, client):
+    api.add("match", "rl_tier_mixed.json")
+    text = fmt.format_match_list(run(matches.get_results(client, "rocketleague")))
+    assert "Dropshot" not in text
+    assert "Showmatch" not in text
+    assert text.count("RLCS 2026 - World Championship") == 2
+
+
+def _fifae(api, client, start, end, **kwargs):
+    api.add("match", "mixed_date_only.json")
+    return run(
+        matches.get_matches_between(
+            client, "rocketleague|leagueoflegends", start, end, max_tier=1, **kwargs
+        )
+    )
+
+
+def test_day_only_matches_are_summarised(api, client):
+    result = _fifae(api, client, "2026-10-20T00:00Z", "2026-10-21T00:00Z")
+    text = fmt.format_match_list(result)
+    print(text)
+    assert (
+        "1. FIFAe World Cup 2026 – Group A (Rocket League): 16 matches on 2026-10-20, "
+        "times not announced yet" in text
+    )
+    assert "2. FIFAe World Cup 2026 – Group B (Rocket League): 14 matches on 2026-10-20" in text
+    assert "3. 2026-10-20 12:00 UTC | League of Legends | 2026 World Championship" in text
+    assert "time TBA" not in text
+    assert "more" not in text
+    # the structured data keeps every match
+    assert len(result.to_dict()["matches"]) == 31
+
+
+def test_few_day_only_matches_are_listed(api, client):
+    rows = load("mixed_date_only.json")["result"]
+    api.add("match", {"result": rows[2:5]})
+    result = run(matches.get_matches_between(client, "rocketleague", "2026-10-20", "2026-10-21"))
+    text = fmt.format_match_list(result)
+    assert text.count("2026-10-20 (time TBA) | FIFAe World Cup 2026 | Group A") == 3
+    assert "matches on" not in text
+
+
+def test_truncation_and_omitted_day_only_text(api, client):
+    result = _fifae(api, client, "2026-10-19T00:00Z", "2026-10-21T00:00Z", limit=1)
+    text = fmt.format_match_list(result)
+    assert "… and 2 more (list cut off" in text
+    result = _fifae(api, client, "2026-10-19T13:35Z", "2026-10-20T01:35Z")
+    text = fmt.format_match_list(result)
+    print(text)
+    assert "FIFAe" not in text
+    assert "30 match(es) with only a date and no time" in text

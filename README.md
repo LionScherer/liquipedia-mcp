@@ -102,14 +102,29 @@ you pass `--allow-remote`.
 
 | Tool | What it does | Requests |
 | --- | --- | --- |
-| `get_results(wiki, team?, tournament?, max_tier=1, limit=5)` | Finished matches, newest first, with series score, winner by name, every game score (incl. overtime). Champion picks + MVP for ≤ 3 LoL matches. | 1 |
-| `get_upcoming(wiki, team?, tournament?, max_tier=1, limit=10)` | Scheduled matches from now on, soonest first. TBD pairings are left out. | 1 |
-| `get_matches_between(wikis, start_utc, end_utc, max_tier=1, team?)` | Everything in a time range (≤ 31 days), several wikis in one request. | 1 |
+| `get_results(wiki, team?, tournament?, max_tier=1, include_minor_types=false, limit=5)` | Finished matches, newest first, with series score, winner by name, every game score (incl. overtime). Champion picks + MVP for ≤ 3 LoL matches. | 1 |
+| `get_upcoming(wiki, team?, tournament?, max_tier=1, include_minor_types=false, limit=10)` | Scheduled matches from now on, soonest first. TBD pairings are left out. | 1 |
+| `get_matches_between(wikis, start_utc, end_utc, max_tier=1, include_minor_types=false, team?)` | Everything in a time range (≤ 31 days), several wikis in one request. Up to 50 matches with a known time, plus day-only matches (see below). | 1 |
 | `get_standings(wiki, team? \| tournament?)` | Current table of a team (finds the phase itself) or all groups of a tournament (exact name). | 2–3 |
 | `get_match_details(wiki, team, opponent?, limit=1)` | Every game of the team's latest match(es): scores, OT, length, kills, maps, MVP, champions. | 1 |
 
 Tier filters (`1`=S, `2`=A, `3`=B, `4`=C, `5`=D) only apply to general queries; with a
-team or tournament, all tiers are included. Tool descriptions tell the model to read each
+team or tournament, all tiers are included. A tier filter keeps exactly tiers
+`1..max_tier`: unranked events (`liquipediatier` `-1`) never pass, and minor tier types
+(`Qualifier`, `Showmatch`, `Misc`, `Monthly`, `Weekly`, `Biweekly`, `Daily`, `Charity`)
+are left out unless `include_minor_types=true`. Regular tournaments have an empty tier
+type and always stay in.
+
+Matches whose time is not announced yet (`dateexact=0`) only carry a day; the 00:00 in
+their `date` is a placeholder (the structured result has `date_exact=false` and `day`).
+`get_matches_between` treats them as whole UTC days: they are included only if their day
+lies completely inside the range, or the range lies completely inside that day. A range
+like 13:35 to 01:35 the next day therefore leaves the second day's day-only matches out
+and says how many were skipped. Exact and day-only matches are limited separately, so
+day-only matches cannot push exact ones out; a cut-off list says "… and N more". In the
+text, more than five unplayed day-only matches of one tournament stage and day become
+one line ("FIFAe World Cup 2026 – Group A: 16 matches on 2026-10-20, times not announced
+yet"); the structured data still lists every match. Tool descriptions tell the model to read each
 match line on its own, never invent totals, never present unplayed matches as 0–0, and to
 cite Liquipedia.
 

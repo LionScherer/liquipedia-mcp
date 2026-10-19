@@ -1,0 +1,278 @@
+{
+ "result": [
+  {
+   "wiki": "rocketleague",
+   "liquipediatier": "-1",
+   "liquipediatiertype": "",
+   "game": "",
+   "status": "",
+   "tournament": "Dropshot Resurgence - 2v2 Double Ball Dropshot",
+   "tickername": "",
+   "date": "2026-10-18 21:40:00",
+   "dateexact": 1,
+   "winner": "1",
+   "finished": 1,
+   "bestof": 5,
+   "section": "Playoffs",
+   "match2bracketdata": {
+    "header": "Grand Final"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Dropshotters",
+     "template": "dropshotters",
+     "icon": "",
+     "score": 3,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Ball Busters",
+     "template": "ballbusters",
+     "icon": "",
+     "score": 1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    }
+   ],
+   "match2games": []
+  },
+  {
+   "wiki": "rocketleague",
+   "liquipediatier": "1",
+   "liquipediatiertype": "",
+   "game": "",
+   "status": "",
+   "tournament": "RLCS 2026 - World Championship",
+   "tickername": "",
+   "date": "2026-10-18 20:00:00",
+   "dateexact": 1,
+   "winner": "1",
+   "finished": 1,
+   "bestof": 7,
+   "section": "Playoffs",
+   "match2bracketdata": {
+    "header": "Grand Final"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Team Falcons",
+     "template": "teamfalcons",
+     "icon": "",
+     "score": 4,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Karmine Corp",
+     "template": "karminecorp",
+     "icon": "",
+     "score": 2,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    }
+   ],
+   "match2games": []
+  },
+  {
+   "wiki": "rocketleague",
+   "liquipediatier": "-1",
+   "liquipediatiertype": "",
+   "game": "",
+   "status": "",
+   "tournament": "Dropshot Resurgence - 2v2 Double Ball Dropshot",
+   "tickername": "",
+   "date": "2026-10-18 19:30:00",
+   "dateexact": 1,
+   "winner": "1",
+   "finished": 1,
+   "bestof": 5,
+   "section": "Playoffs",
+   "match2bracketdata": {
+    "header": "Semifinal"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Dropshotters",
+     "template": "dropshotters",
+     "icon": "",
+     "score": 3,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Hoops Kings",
+     "template": "hoopskings",
+     "icon": "",
+     "score": 0,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    }
+   ],
+   "match2games": []
+  },
+  {
+   "wiki": "rocketleague",
+   "liquipediatier": "1",
+   "liquipediatiertype": "Showmatch",
+   "game": "",
+   "status": "",
+   "tournament": "RLCS 2026 - World Championship Showmatch",
+   "tickername": "",
+   "date": "2026-10-18 18:00:00",
+   "dateexact": 1,
+   "winner": "2",
+   "finished": 1,
+   "bestof": 5,
+   "section": "",
+   "match2bracketdata": [],
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Creators",
+     "template": "creators",
+     "icon": "",
+     "score": 2,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Pros",
+     "template": "pros",
+     "icon": "",
+     "score": 3,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    }
+   ],
+   "match2games": []
+  },
+  {
+   "wiki": "rocketleague",
+   "liquipediatier": "",
+   "liquipediatiertype": "",
+   "game": "",
+   "status": "",
+   "tournament": "Dropshot Resurgence - 2v2 Double Ball Dropshot",
+   "tickername": "",
+   "date": "2026-10-18 17:15:00",
+   "dateexact": 1,
+   "winner": "1",
+   "finished": 1,
+   "bestof": 5,
+   "section": "Playoffs",
+   "match2bracketdata": {
+    "header": "Semifinal"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Ball Busters",
+     "template": "ballbusters",
+     "icon": "",
+     "score": 3,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Wall Walkers",
+     "template": "wallwalkers",
+     "icon": "",
+     "score": 2,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    }
+   ],
+   "match2games": []
+  },
+  {
+   "wiki": "rocketleague",
+   "liquipediatier": 1,
+   "liquipediatiertype": "",
+   "game": "",
+   "status": "",
+   "tournament": "RLCS 2026 - World Championship",
+   "tickername": "",
+   "date": "2026-10-18 16:00:00",
+   "dateexact": 1,
+   "winner": "1",
+   "finished": 1,
+   "bestof": 7,
+   "section": "Playoffs",
+   "match2bracketdata": {
+    "header": "Semifinal"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Team Falcons",
+     "template": "teamfalcons",
+     "icon": "",
+     "score": 4,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Team Vitality",
+     "template": "teamvitality",
+     "icon": "",
+     "score": 0,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    }
+   ],
+   "match2games": []
+  }
+ ]
+}

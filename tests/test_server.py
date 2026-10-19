@@ -100,3 +100,18 @@ def test_cli_refuses_public_bind(monkeypatch, capsys, host):
 @pytest.mark.parametrize("host", ["127.0.0.1", "localhost", "::1"])
 def test_loopback_hosts(host):
     assert cli._is_loopback(host)
+
+
+def test_include_minor_types_reaches_query(api, client):
+    api.add("match", "rl_tier_mixed.json")
+    result = run(
+        _call(
+            build_server(client),
+            "get_results",
+            {"wiki": "rocketleague", "include_minor_types": True},
+        )
+    )
+    assert not result.is_error
+    assert "liquipediatiertype" not in api.calls[0].params["conditions"]
+    assert "Showmatch" in result.content[0].text
+    assert "Dropshot" not in result.content[0].text

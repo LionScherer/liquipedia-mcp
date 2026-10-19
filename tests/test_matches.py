@@ -9,16 +9,22 @@ from liquipedia_mcp.matches import MATCH_FIELDS, parse_match
 from .conftest import load, run
 
 NOW = datetime(2026, 10, 19, 12, 0, tzinfo=UTC)
+NO_MINOR = (
+    " AND [[liquipediatiertype::!Qualifier]] AND [[liquipediatiertype::!Showmatch]]"
+    " AND [[liquipediatiertype::!Misc]] AND [[liquipediatiertype::!Monthly]]"
+    " AND [[liquipediatiertype::!Weekly]] AND [[liquipediatiertype::!Biweekly]]"
+    " AND [[liquipediatiertype::!Daily]] AND [[liquipediatiertype::!Charity]]"
+)
 
 
 def test_results_query_shape(api, client):
     api.add("match", "rl_results.json")
     run(matches.get_results(client, "rocketleague", limit=3))
     (call,) = api.calls
-    assert call.params["conditions"] == "[[finished::1]] AND [[liquipediatier::<2]]"
+    assert call.params["conditions"] == "[[finished::1]] AND [[liquipediatier::1]]" + NO_MINOR
     assert call.params["order"] == "date DESC"
     assert call.params["query"] == MATCH_FIELDS
-    assert call.params["limit"] == "3"
+    assert call.params["limit"] == "16"  # over-fetched for the client-side tier check
 
 
 def test_results_parsing(api, client):
@@ -74,8 +80,11 @@ def test_tournament_filter_has_no_tier(api, client):
 
 def test_max_tier_filter(api, client):
     api.add("match", {"result": []})
-    run(matches.get_results(client, "rocketleague", max_tier=3))
-    assert api.calls[0].params["conditions"].endswith("[[liquipediatier::<4]]")
+    run(matches.get_results(client, "rocketleague", max_tier=3, include_minor_types=True))
+    assert api.calls[0].params["conditions"] == (
+        "[[finished::1]] AND "
+        "([[liquipediatier::1]] OR [[liquipediatier::2]] OR [[liquipediatier::3]])"
+    )
 
 
 def test_winner_from_scores_not_index():
@@ -111,7 +120,7 @@ def test_upcoming(api, client):
     result = run(matches.get_upcoming(client, "rocketleague", now=NOW, limit=5))
     (call,) = api.calls
     assert call.params["conditions"] == (
-        "[[finished::0]] AND [[date::>2026-10-19 12:00:00]] AND [[liquipediatier::<2]]"
+        "[[finished::0]] AND [[date::>2026-10-19 12:00:00]] AND [[liquipediatier::1]]" + NO_MINOR
     )
     assert call.params["order"] == "date ASC"
     assert len(result.matches) == 2  # the TBD pairing is left out
@@ -148,10 +157,12 @@ def test_between_multiple_wikis_one_request(api, client):
     (call,) = api.calls
     assert call.params["wiki"] == "rocketleague|leagueoflegends"
     assert call.params["conditions"] == (
-        "[[date::>2026-10-24 00:00:00]] AND [[date::<2026-10-26 00:00:00]] "
-        "AND [[liquipediatier::<3]]"
+        # one second early: day-only matches of the first day sit at 00:00:00
+        "[[date::>2026-10-23 23:59:59]] AND [[date::<2026-10-26 00:00:00]] "
+        "AND ([[liquipediatier::1]] OR [[liquipediatier::2]])" + NO_MINOR
     )
     assert call.params["order"] == "date ASC"
+    assert call.params["limit"] == "500"
     assert result.wikis == ["rocketleague", "leagueoflegends"]
     assert len(result.matches) == 2
 
@@ -242,3 +253,120 @@ def test_tolerates_string_encoded_and_odd_values():
     assert match.round == "Grand Final"
     row["match2opponents"] = row["match2opponents"][:1]
     assert parse_match(row) is None
+
+
+# ------------------------------------------------- tier filter (live bug: tier -1)
+
+
+def test_tier_minus_one_is_dropped(api, client):
+    api.add("match", "rl_tier_mixed.json")
+    result = run(matches.get_results(client, "rocketleague", limit=5))
+    assert api.calls[0].params["conditions"] == (
+        "[[finished::1]] AND [[liquipediatier::1]]" + NO_MINOR
+    )
+    # "-1" (unranked), "" and the Showmatch are dropped client-side as well
+    assert [m.tournament for m in result.matches] == ["RLCS 2026 - World Championship"] * 2
+    assert all(m.tier == 1 for m in result.matches)
+    assert not result.include_minor_types
+
+
+def test_include_minor_types_keeps_showmatch_but_not_unranked(api, client):
+    api.add("match", "rl_tier_mixed.json")
+    result = run(matches.get_results(client, "rocketleague", include_minor_types=True))
+    assert "liquipediatiertype" not in api.calls[0].params["conditions"]
+    assert [m.tier_type for m in result.matches] == [None, "Showmatch", None]
+
+
+def test_team_query_keeps_all_tiers(api, client):
+    api.add("match", "rl_tier_mixed.json")
+    result = run(matches.get_results(client, "rocketleague", team="Dropshotters"))
+    assert "liquipediatier" not in api.calls[0].params["conditions"]
+    assert len(result.matches) == 6  # the client-side tier check is off too
+
+
+@pytest.mark.parametrize(
+    ("tier", "tier_type", "max_tier", "minor", "expected"),
+    [
+        ("1", "", 1, False, True),
+        (2, None, 2, False, True),
+        ("2", "", 1, False, False),
+        ("-1", "", 5, False, False),
+        ("", "", 5, False, False),
+        (None, "", 5, False, False),
+        ("1", "Qualifier", 1, False, False),
+        ("1", "weekly", 1, False, False),
+        ("1", "Qualifier", 1, True, True),
+    ],
+)
+def test_in_tier_scope(tier, tier_type, max_tier, minor, expected):
+    row = {"liquipediatier": tier, "liquipediatiertype": tier_type}
+    assert matches.in_tier_scope(row, max_tier, minor) is expected
+
+
+# ------------------------------------------- day-only matches (live bug: FIFAe flood)
+
+
+def _between(api, client, start, end, **kwargs):
+    api.add("match", "mixed_date_only.json")
+    return run(
+        matches.get_matches_between(
+            client, "rocketleague|leagueoflegends", start, end, max_tier=1, **kwargs
+        )
+    )
+
+
+def test_day_only_matches_are_dates_not_midnight():
+    row = load("mixed_date_only.json")["result"][2]
+    match = parse_match(row)
+    assert match.date_exact is False
+    assert match.day == "2026-10-20"
+
+
+def test_partly_covered_day_leaves_day_only_matches_out(api, client):
+    # the live query: now-12h .. now+12h, ending 01:35 on the day of the FIFAe matches
+    result = _between(api, client, "2026-10-19T13:35Z", "2026-10-20T01:35Z")
+    assert [m.date.hour for m in result.matches] == [14, 18]
+    assert all(m.date_exact for m in result.matches)
+    assert result.omitted_date_only == 30
+    assert not result.truncated
+
+
+def test_whole_day_includes_day_only_matches(api, client):
+    result = _between(api, client, "2026-10-20T00:00Z", "2026-10-21T00:00Z")
+    assert len(result.matches) == 31
+    assert sum(not m.date_exact for m in result.matches) == 30
+    assert result.matches[-1].tournament == "2026 World Championship"
+    assert result.omitted_date_only == 0
+
+
+def test_range_inside_one_day_includes_its_day_only_matches(api, client):
+    result = _between(api, client, "2026-10-20T08:00Z", "2026-10-20T20:00Z")
+    assert len(result.matches) == 31
+
+
+def test_day_only_matches_do_not_push_out_exact_ones(api, client):
+    result = _between(api, client, "2026-10-19T00:00Z", "2026-10-21T00:00Z", limit=2)
+    exact = [m for m in result.matches if m.date_exact]
+    # all 30 day-only matches sort before the 12:00 match, yet exact ones are limited alone
+    assert [m.date.hour for m in exact] == [14, 18]
+    assert sum(not m.date_exact for m in result.matches) == 30
+    assert result.truncated
+    assert result.truncated_count == 1
+    assert not result.truncated_more
+
+
+def test_day_only_limit_is_separate(api, client):
+    result = _between(
+        api, client, "2026-10-19T00:00Z", "2026-10-21T00:00Z", limit=1, date_only_limit=10
+    )
+    assert sum(m.date_exact for m in result.matches) == 1
+    assert sum(not m.date_exact for m in result.matches) == 10
+    assert result.truncated_count == 2 + 20
+
+
+def test_full_request_marks_more(api, client):
+    rows = load("mixed_date_only.json")["result"]
+    api.add("match", {"result": (rows * 16)[: matches.RANGE_REQUEST_LIMIT]})
+    result = run(matches.get_matches_between(client, "rocketleague", "2026-10-19", "2026-10-21"))
+    assert result.truncated
+    assert result.truncated_more
