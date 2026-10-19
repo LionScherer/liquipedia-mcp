@@ -1,0 +1,400 @@
+{
+ "result": [
+  {
+   "opponentname": "T1",
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "roundindex": 0,
+   "scoreboard": {
+    "match": {
+     "w": 0,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 0,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 3,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50600
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "KeSPA_Cup/2026",
+   "standingsindex": 0,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 3,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 6,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 1,
+   "definitestatus": "up",
+   "currentstatus": "",
+   "pageid": 50500
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "KeSPA_Cup/2026",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 4,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 1,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50500
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "KeSPA_Cup/2026",
+   "standingsindex": 0,
+   "roundindex": 1,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 2,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 1,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50500
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 9,
+   "scoreboard": {
+    "match": {
+     "w": 7,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 14,
+     "d": 0,
+     "l": 2
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 8,
+   "scoreboard": {
+    "match": {
+     "w": 6,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 12,
+     "d": 0,
+     "l": 2
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 7,
+   "scoreboard": {
+    "match": {
+     "w": 5,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 10,
+     "d": 0,
+     "l": 2
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 6,
+   "scoreboard": {
+    "match": {
+     "w": 5,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 10,
+     "d": 0,
+     "l": 1
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 5,
+   "scoreboard": {
+    "match": {
+     "w": 4,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 8,
+     "d": 0,
+     "l": 1
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 4,
+   "scoreboard": {
+    "match": {
+     "w": 3,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 6,
+     "d": 0,
+     "l": 1
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 4,
+     "d": 0,
+     "l": 1
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 4,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 1,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 2,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 13,
+   "scoreboard": {
+    "match": {
+     "w": 10,
+     "d": 0,
+     "l": 3
+    },
+    "game": {
+     "w": 20,
+     "d": 0,
+     "l": 3
+    }
+   },
+   "placement": 2,
+   "definitestatus": "up",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 12,
+   "scoreboard": {
+    "match": {
+     "w": 9,
+     "d": 0,
+     "l": 3
+    },
+    "game": {
+     "w": 18,
+     "d": 0,
+     "l": 3
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 11,
+   "scoreboard": {
+    "match": {
+     "w": 8,
+     "d": 0,
+     "l": 3
+    },
+    "game": {
+     "w": 16,
+     "d": 0,
+     "l": 3
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 10,
+   "scoreboard": {
+    "match": {
+     "w": 8,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 16,
+     "d": 0,
+     "l": 2
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Road_to_MSI",
+   "standingsindex": 0,
+   "roundindex": 1,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 4,
+     "d": 0,
+     "l": 3
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 49000
+  }
+ ]
+}

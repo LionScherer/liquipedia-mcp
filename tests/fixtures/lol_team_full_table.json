@@ -1,0 +1,444 @@
+{
+ "result": [
+  {
+   "opponentname": "Gen.G",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 7,
+   "scoreboard": {
+    "match": {
+     "w": 6,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 13,
+     "d": 0,
+     "l": 3
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Gen.G",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 13,
+   "scoreboard": {
+    "match": {
+     "w": 12,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 25,
+     "d": 0,
+     "l": 6
+    }
+   },
+   "placement": 1,
+   "definitestatus": "up",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Gen.G",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 4,
+     "d": 0,
+     "l": 1
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Gen.G",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 10,
+   "scoreboard": {
+    "match": {
+     "w": 9,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 19,
+     "d": 0,
+     "l": 5
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 7,
+   "scoreboard": {
+    "match": {
+     "w": 5,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 11,
+     "d": 0,
+     "l": 2
+    }
+   },
+   "placement": 3,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 13,
+   "scoreboard": {
+    "match": {
+     "w": 10,
+     "d": 0,
+     "l": 3
+    },
+    "game": {
+     "w": 20,
+     "d": 0,
+     "l": 3
+    }
+   },
+   "placement": 2,
+   "definitestatus": "up",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 3,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 3,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 10,
+   "scoreboard": {
+    "match": {
+     "w": 8,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 15,
+     "d": 0,
+     "l": 2
+    }
+   },
+   "placement": 3,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Hanwha Life Esports",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 7,
+   "scoreboard": {
+    "match": {
+     "w": 4,
+     "d": 0,
+     "l": 3
+    },
+    "game": {
+     "w": 9,
+     "d": 0,
+     "l": 6
+    }
+   },
+   "placement": 4,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Hanwha Life Esports",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 13,
+   "scoreboard": {
+    "match": {
+     "w": 8,
+     "d": 0,
+     "l": 5
+    },
+    "game": {
+     "w": 17,
+     "d": 0,
+     "l": 12
+    }
+   },
+   "placement": 3,
+   "definitestatus": "up",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Hanwha Life Esports",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 3,
+     "d": 0,
+     "l": 2
+    }
+   },
+   "placement": 4,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Hanwha Life Esports",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 10,
+   "scoreboard": {
+    "match": {
+     "w": 6,
+     "d": 0,
+     "l": 4
+    },
+    "game": {
+     "w": 13,
+     "d": 0,
+     "l": 9
+    }
+   },
+   "placement": 4,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Dplus KIA",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 7,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 5
+    },
+    "game": {
+     "w": 5,
+     "d": 0,
+     "l": 10
+    }
+   },
+   "placement": 5,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Dplus KIA",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 13,
+   "scoreboard": {
+    "match": {
+     "w": 4,
+     "d": 0,
+     "l": 9
+    },
+    "game": {
+     "w": 10,
+     "d": 0,
+     "l": 19
+    }
+   },
+   "placement": 4,
+   "definitestatus": "stay",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Dplus KIA",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 2,
+     "d": 0,
+     "l": 3
+    }
+   },
+   "placement": 5,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "Dplus KIA",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 10,
+   "scoreboard": {
+    "match": {
+     "w": 3,
+     "d": 0,
+     "l": 7
+    },
+    "game": {
+     "w": 8,
+     "d": 0,
+     "l": 15
+    }
+   },
+   "placement": 5,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "KT Rolster",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 7,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 6
+    },
+    "game": {
+     "w": 2,
+     "d": 0,
+     "l": 13
+    }
+   },
+   "placement": 1,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "KT Rolster",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 13,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 12
+    },
+    "game": {
+     "w": 4,
+     "d": 0,
+     "l": 24
+    }
+   },
+   "placement": 5,
+   "definitestatus": "down",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "KT Rolster",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 0,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 1,
+     "d": 0,
+     "l": 4
+    }
+   },
+   "placement": 1,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  },
+  {
+   "opponentname": "KT Rolster",
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "roundindex": 10,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 9
+    },
+    "game": {
+     "w": 3,
+     "d": 0,
+     "l": 18
+    }
+   },
+   "placement": 1,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50100
+  }
+ ]
+}

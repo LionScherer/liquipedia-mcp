@@ -1,0 +1,258 @@
+{
+ "result": [
+  {
+   "liquipediatier": "1",
+   "liquipediatiertype": "",
+   "game": "rl",
+   "status": "",
+   "tournament": "RLCS 2027 - Paris Open",
+   "tickername": "RLCS Worlds",
+   "date": "2026-10-24 14:00:00",
+   "dateexact": 1,
+   "winner": "",
+   "finished": 0,
+   "bestof": 5,
+   "section": "Swiss Stage",
+   "match2bracketdata": {
+    "header": "Round 1"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Team Falcons",
+     "template": "teamfalcons",
+     "icon": "",
+     "score": -1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Rw9",
+       "displayname": "Rw9",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Trk511",
+       "displayname": "Trk511",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Kiileerrz",
+       "displayname": "Kiileerrz",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Karmine Corp",
+     "template": "karminecorp",
+     "icon": "",
+     "score": -1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Atow",
+       "displayname": "Atow",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Vatira",
+       "displayname": "Vatira",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Exotiik",
+       "displayname": "Exotiik",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    }
+   ],
+   "match2games": [
+    {
+     "map": "",
+     "scores": [
+      -1,
+      -1
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": -1
+      },
+      {
+       "score": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "liquipediatier": "1",
+   "liquipediatiertype": "",
+   "game": "rl",
+   "status": "",
+   "tournament": "RLCS 2027 - Paris Open",
+   "tickername": "RLCS Worlds",
+   "date": "2026-10-24 15:30:00",
+   "dateexact": 1,
+   "winner": "",
+   "finished": 0,
+   "bestof": 5,
+   "section": "Swiss Stage",
+   "match2bracketdata": {
+    "header": "Round 1"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "",
+     "template": "",
+     "icon": "",
+     "score": -1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Team Vitality",
+     "template": "teamvitality",
+     "icon": "",
+     "score": -1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Zen",
+       "displayname": "Zen",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Alpha54",
+       "displayname": "Alpha54",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Diaz_(Brazilian_Player)",
+       "displayname": "Diaz",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    }
+   ],
+   "match2games": []
+  },
+  {
+   "liquipediatier": "1",
+   "liquipediatiertype": "",
+   "game": "rl",
+   "status": "",
+   "tournament": "RLCS 2027 - Paris Open",
+   "tickername": "RLCS Worlds",
+   "date": "2026-10-25 00:00:00",
+   "dateexact": 0,
+   "winner": "",
+   "finished": 0,
+   "bestof": 5,
+   "section": "Swiss Stage",
+   "match2bracketdata": {
+    "header": "!r2!h"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "NRG",
+     "template": "nrg",
+     "icon": "",
+     "score": -1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Daniel_(American_Player)",
+       "displayname": "Daniel",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Beastmode",
+       "displayname": "Beastmode",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Atomic",
+       "displayname": "Atomic",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Gentle Mates",
+     "template": "gentlemates",
+     "icon": "",
+     "score": -1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Juicy",
+       "displayname": "Juicy",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Seikoo",
+       "displayname": "Seikoo",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Monkey_M00n",
+       "displayname": "Monkey_M00n",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    }
+   ],
+   "match2games": []
+  }
+ ]
+}

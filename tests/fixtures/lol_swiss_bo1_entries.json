@@ -1,0 +1,158 @@
+{
+ "result": [
+  {
+   "opponentname": "T1",
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 0,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 1,
+   "definitestatus": "",
+   "currentstatus": "up",
+   "pageid": 50600
+  },
+  {
+   "opponentname": "T1",
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "roundindex": 1,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 0,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 2,
+   "definitestatus": "",
+   "currentstatus": "up",
+   "pageid": 50600
+  },
+  {
+   "opponentname": "Gen.G",
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 0,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 3,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50600
+  },
+  {
+   "opponentname": "Gen.G",
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "roundindex": 1,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 0,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 1,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50600
+  },
+  {
+   "opponentname": "Fnatic",
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 0,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 0,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 5,
+   "definitestatus": "",
+   "currentstatus": "down",
+   "pageid": 50600
+  },
+  {
+   "opponentname": "Fnatic",
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "roundindex": 1,
+   "scoreboard": {
+    "match": {
+     "w": 0,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 0,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 6,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50600
+  },
+  {
+   "opponentname": "G2 Esports",
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 0,
+     "d": 0,
+     "l": 0
+    }
+   },
+   "placement": 3,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 50600
+  }
+ ]
+}

@@ -1,0 +1,696 @@
+{
+ "result": [
+  {
+   "liquipediatier": "1",
+   "liquipediatiertype": "",
+   "game": "rl",
+   "status": "",
+   "tournament": "RLCS 2026 - World Championship",
+   "tickername": "RLCS Worlds",
+   "date": "2026-09-14 18:30:00",
+   "dateexact": 1,
+   "winner": "1",
+   "finished": 1,
+   "bestof": 7,
+   "section": "Playoffs",
+   "match2bracketdata": {
+    "header": "Grand Final",
+    "type": "bracket"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Team Falcons",
+     "template": "teamfalcons",
+     "icon": "",
+     "score": 4,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Rw9",
+       "displayname": "Rw9",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Trk511",
+       "displayname": "Trk511",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Kiileerrz",
+       "displayname": "Kiileerrz",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Karmine Corp",
+     "template": "karminecorp",
+     "icon": "",
+     "score": 1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Atow",
+       "displayname": "Atow",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Vatira",
+       "displayname": "Vatira",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Exotiik",
+       "displayname": "Exotiik",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    }
+   ],
+   "match2games": [
+    {
+     "map": "DFH Stadium",
+     "scores": [
+      1,
+      0
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "6:21",
+     "extradata": {
+      "ot": "true",
+      "otlength": "1:12"
+     },
+     "opponents": [
+      {
+       "score": 1
+      },
+      {
+       "score": 0
+      }
+     ]
+    },
+    {
+     "map": "Mannfield",
+     "scores": [
+      2,
+      1
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 2
+      },
+      {
+       "score": 1
+      }
+     ]
+    },
+    {
+     "map": "Champions Field",
+     "scores": [
+      0,
+      3
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "2",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 0
+      },
+      {
+       "score": 3
+      }
+     ]
+    },
+    {
+     "map": "Utopia Coliseum",
+     "scores": [
+      1,
+      0
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "",
+     "extradata": {
+      "ot": "true",
+      "otlength": "1:12"
+     },
+     "opponents": [
+      {
+       "score": 1
+      },
+      {
+       "score": 0
+      }
+     ]
+    },
+    {
+     "map": "Urban Central",
+     "scores": [
+      3,
+      2
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 3
+      },
+      {
+       "score": 2
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [
+      -1,
+      -1
+     ],
+     "status": "notplayed",
+     "resulttype": "",
+     "winner": "",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": -1
+      },
+      {
+       "score": -1
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [
+      -1,
+      -1
+     ],
+     "status": "notplayed",
+     "resulttype": "",
+     "winner": "",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": -1
+      },
+      {
+       "score": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "liquipediatier": "1",
+   "liquipediatiertype": "",
+   "game": "rl",
+   "status": "",
+   "tournament": "RLCS 2026 - World Championship",
+   "tickername": "RLCS Worlds",
+   "date": "2026-09-14 15:00:00",
+   "dateexact": 1,
+   "winner": "1",
+   "finished": 1,
+   "bestof": 7,
+   "section": "Playoffs",
+   "match2bracketdata": {
+    "header": "!l4!x",
+    "type": "bracket"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Karmine Corp",
+     "template": "karminecorp",
+     "icon": "",
+     "score": 4,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Atow",
+       "displayname": "Atow",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Vatira",
+       "displayname": "Vatira",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Exotiik",
+       "displayname": "Exotiik",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Gentle Mates",
+     "template": "gentlemates",
+     "icon": "",
+     "score": 0,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Juicy",
+       "displayname": "Juicy",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Seikoo",
+       "displayname": "Seikoo",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Monkey_M00n",
+       "displayname": "Monkey_M00n",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    }
+   ],
+   "match2games": [
+    {
+     "map": "DFH Stadium",
+     "scores": [
+      1,
+      0
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 1
+      },
+      {
+       "score": 0
+      }
+     ]
+    },
+    {
+     "map": "Mannfield",
+     "scores": [
+      1,
+      0
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "",
+     "extradata": {
+      "ot": "true",
+      "otlength": "1:12"
+     },
+     "opponents": [
+      {
+       "score": 1
+      },
+      {
+       "score": 0
+      }
+     ]
+    },
+    {
+     "map": "Neo Tokyo",
+     "scores": [
+      1,
+      0
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 1
+      },
+      {
+       "score": 0
+      }
+     ]
+    },
+    {
+     "map": "Forbidden Temple",
+     "scores": [
+      1,
+      0
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 1
+      },
+      {
+       "score": 0
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [
+      0,
+      0
+     ],
+     "status": "",
+     "resulttype": "np",
+     "winner": "",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 0
+      },
+      {
+       "score": 0
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [
+      -1,
+      -1
+     ],
+     "status": "notplayed",
+     "resulttype": "",
+     "winner": "",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": -1
+      },
+      {
+       "score": -1
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [
+      -1,
+      -1
+     ],
+     "status": "notplayed",
+     "resulttype": "",
+     "winner": "",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": -1
+      },
+      {
+       "score": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "liquipediatier": "1",
+   "liquipediatiertype": "",
+   "game": "rl",
+   "status": "",
+   "tournament": "RLCS 2026 - World Championship",
+   "tickername": "RLCS Worlds",
+   "date": "2026-09-13 20:00:00",
+   "dateexact": 1,
+   "winner": "2",
+   "finished": 1,
+   "bestof": 5,
+   "section": "Playoffs",
+   "match2bracketdata": {
+    "header": "Quarterfinals",
+    "type": "bracket"
+   },
+   "extradata": {},
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "NRG",
+     "template": "nrg",
+     "icon": "",
+     "score": 1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Daniel_(American_Player)",
+       "displayname": "Daniel",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Beastmode",
+       "displayname": "Beastmode",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Atomic",
+       "displayname": "Atomic",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Team Vitality",
+     "template": "teamvitality",
+     "icon": "",
+     "score": 3,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Zen",
+       "displayname": "Zen",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Alpha54",
+       "displayname": "Alpha54",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Diaz_(Brazilian_Player)",
+       "displayname": "Diaz",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    }
+   ],
+   "match2games": [
+    {
+     "map": "DFH Stadium",
+     "scores": [
+      2,
+      4
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "2",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 2
+      },
+      {
+       "score": 4
+      }
+     ]
+    },
+    {
+     "map": "DFH Stadium",
+     "scores": [
+      3,
+      2
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "",
+     "extradata": {
+      "ot": "true",
+      "otlength": "1:12"
+     },
+     "opponents": [
+      {
+       "score": 3
+      },
+      {
+       "score": 2
+      }
+     ]
+    },
+    {
+     "map": "DFH Stadium",
+     "scores": [
+      0,
+      1
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "2",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 0
+      },
+      {
+       "score": 1
+      }
+     ]
+    },
+    {
+     "map": "DFH Stadium",
+     "scores": [
+      1,
+      5
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "2",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": 1
+      },
+      {
+       "score": 5
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [
+      -1,
+      -1
+     ],
+     "status": "notplayed",
+     "resulttype": "",
+     "winner": "",
+     "length": "",
+     "extradata": {
+      "ot": "false",
+      "otlength": ""
+     },
+     "opponents": [
+      {
+       "score": -1
+      },
+      {
+       "score": -1
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

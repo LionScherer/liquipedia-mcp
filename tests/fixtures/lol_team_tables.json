@@ -1,0 +1,48 @@
+{
+ "result": [
+  {
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "tournament": "2026 World Championship",
+   "title": "Swiss Stage",
+   "extradata": {
+    "stagename": "Swiss Stage",
+    "enddate": "2026-10-26",
+    "finished": "0"
+   }
+  },
+  {
+   "pagename": "KeSPA_Cup/2026",
+   "standingsindex": 0,
+   "tournament": "KeSPA Cup 2026",
+   "title": "Group A",
+   "extradata": {
+    "stagename": "Group Stage",
+    "enddate": "2026-01-20",
+    "finished": "1"
+   }
+  },
+  {
+   "pagename": "LCK/2026/Rounds_3-5",
+   "standingsindex": 0,
+   "tournament": "LCK 2026",
+   "title": "Legend Group",
+   "extradata": {
+    "stagename": "Rounds 3-5",
+    "enddate": "2026-09-07",
+    "finished": "1"
+   }
+  },
+  {
+   "pagename": "LCK/2026/Road_to_MSI",
+   "standingsindex": 0,
+   "tournament": "LCK 2026 Road to MSI",
+   "title": "",
+   "extradata": {
+    "stagename": "",
+    "enddate": "2026-05-10",
+    "finished": "1"
+   }
+  }
+ ]
+}

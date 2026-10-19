@@ -1,0 +1,37 @@
+{
+ "result": [
+  {
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 0,
+   "tournament": "RLCS 2026 - World Championship",
+   "title": "Group A",
+   "extradata": {
+    "stagename": "Group Stage",
+    "enddate": "2026-09-11",
+    "finished": "1"
+   }
+  },
+  {
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 1,
+   "tournament": "RLCS 2026 - World Championship",
+   "title": "Group B",
+   "extradata": {
+    "stagename": "Group Stage",
+    "enddate": "2026-09-11",
+    "finished": "1"
+   }
+  },
+  {
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Wildcard",
+   "standingsindex": 0,
+   "tournament": "RLCS 2026 - World Championship",
+   "title": "Wildcard",
+   "extradata": {
+    "stagename": "Wildcard",
+    "enddate": "2026-09-08",
+    "finished": "1"
+   }
+  }
+ ]
+}

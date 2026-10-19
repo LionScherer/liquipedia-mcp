@@ -1,0 +1,202 @@
+{
+ "result": [
+  {
+   "opponentname": "Team Falcons",
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 0,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 3,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 9,
+     "d": 0,
+     "l": 2
+    }
+   },
+   "placement": 1,
+   "definitestatus": "byeup",
+   "currentstatus": "",
+   "pageid": 61000
+  },
+  {
+   "opponentname": "Team Falcons",
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 0,
+   "roundindex": 2,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 6,
+     "d": 0,
+     "l": 1
+    }
+   },
+   "placement": 1,
+   "definitestatus": "",
+   "currentstatus": "",
+   "pageid": 61000
+  },
+  {
+   "opponentname": "Karmine Corp",
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 0,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 7,
+     "d": 0,
+     "l": 5
+    }
+   },
+   "placement": 2,
+   "definitestatus": "up",
+   "currentstatus": "",
+   "pageid": 61000
+  },
+  {
+   "opponentname": "NRG",
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 0,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 5,
+     "d": 0,
+     "l": 7
+    }
+   },
+   "placement": 3,
+   "definitestatus": "up",
+   "currentstatus": "",
+   "pageid": 61000
+  },
+  {
+   "opponentname": "Twisted Minds",
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 0,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 0,
+     "d": 0,
+     "l": 3
+    },
+    "game": {
+     "w": 2,
+     "d": 0,
+     "l": 9
+    }
+   },
+   "placement": 4,
+   "definitestatus": "down",
+   "currentstatus": "",
+   "pageid": 61000
+  },
+  {
+   "opponentname": "Team Vitality",
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 1,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 3,
+     "d": 0,
+     "l": 0
+    },
+    "game": {
+     "w": 9,
+     "d": 0,
+     "l": 3
+    }
+   },
+   "placement": 1,
+   "definitestatus": "seedup",
+   "currentstatus": "",
+   "pageid": 61000
+  },
+  {
+   "opponentname": "Gentle Mates",
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 1,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 2,
+     "d": 0,
+     "l": 1
+    },
+    "game": {
+     "w": 8,
+     "d": 0,
+     "l": 6
+    }
+   },
+   "placement": 2,
+   "definitestatus": "stayup",
+   "currentstatus": "",
+   "pageid": 61000
+  },
+  {
+   "opponentname": "Ninjas in Pyjamas",
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 1,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 1,
+     "d": 0,
+     "l": 2
+    },
+    "game": {
+     "w": 4,
+     "d": 0,
+     "l": 7
+    }
+   },
+   "placement": 3,
+   "definitestatus": "staydown",
+   "currentstatus": "",
+   "pageid": 61000
+  },
+  {
+   "opponentname": "FURIA Esports",
+   "pagename": "Rocket_League_Championship_Series/2026/World_Championship/Group_Stage",
+   "standingsindex": 1,
+   "roundindex": 3,
+   "scoreboard": {
+    "match": {
+     "w": 0,
+     "d": 0,
+     "l": 3
+    },
+    "game": {
+     "w": 3,
+     "d": 0,
+     "l": 9
+    }
+   },
+   "placement": 4,
+   "definitestatus": "down",
+   "currentstatus": "",
+   "pageid": 61000
+  }
+ ]
+}

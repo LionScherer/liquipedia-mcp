@@ -1,0 +1,26 @@
+{
+ "result": [
+  {
+   "pagename": "World_Championship/2026/Swiss_Stage",
+   "standingsindex": 0,
+   "tournament": "2026 World Championship",
+   "title": "Swiss Stage",
+   "extradata": {
+    "stagename": "Swiss Stage",
+    "enddate": "2026-10-26",
+    "finished": "0"
+   }
+  },
+  {
+   "pagename": "World_Championship/2026/Play-In",
+   "standingsindex": 0,
+   "tournament": "2026 World Championship",
+   "title": "Play-In",
+   "extradata": {
+    "stagename": "Play-In",
+    "enddate": "2026-10-12",
+    "finished": "1"
+   }
+  }
+ ]
+}

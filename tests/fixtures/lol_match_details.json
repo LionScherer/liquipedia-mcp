@@ -1,0 +1,448 @@
+{
+ "result": [
+  {
+   "tournament": "2026 World Championship",
+   "date": "2026-10-11 08:00:00",
+   "dateexact": 1,
+   "winner": "1",
+   "finished": 1,
+   "bestof": 5,
+   "status": "",
+   "liquipediatier": "1",
+   "liquipediatiertype": "",
+   "section": "Playoffs",
+   "tickername": "Worlds 2026",
+   "game": "lol",
+   "match2bracketdata": {
+    "header": "Semifinal"
+   },
+   "extradata": {
+    "mvp": {
+     "players": {
+      "1": {
+       "name": "Faker",
+       "displayname": "Faker"
+      },
+      "2": {
+       "name": "Faker",
+       "displayname": "Faker"
+      },
+      "3": {
+       "name": "Chovy",
+       "displayname": "Chovy"
+      },
+      "4": {
+       "name": "Oner",
+       "displayname": "Oner"
+      }
+     },
+     "points": 1
+    }
+   },
+   "match2opponents": [
+    {
+     "id": 0,
+     "type": "team",
+     "name": "T1",
+     "template": "t1",
+     "icon": "",
+     "score": 3,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Zeus",
+       "displayname": "Zeus",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Oner",
+       "displayname": "Oner",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Faker",
+       "displayname": "Faker",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Gumayusi",
+       "displayname": "Gumayusi",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Keria",
+       "displayname": "Keria",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    },
+    {
+     "id": 0,
+     "type": "team",
+     "name": "Gen.G",
+     "template": "gen.g",
+     "icon": "",
+     "score": 1,
+     "status": "S",
+     "placement": 0,
+     "match2players": [
+      {
+       "name": "Kiin",
+       "displayname": "Kiin",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Canyon",
+       "displayname": "Canyon",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Chovy",
+       "displayname": "Chovy",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Ruler",
+       "displayname": "Ruler",
+       "flag": "",
+       "extradata": []
+      },
+      {
+       "name": "Duro",
+       "displayname": "Duro",
+       "flag": "",
+       "extradata": []
+      }
+     ],
+     "extradata": []
+    }
+   ],
+   "match2games": [
+    {
+     "map": "",
+     "scores": [
+      1,
+      0
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "31:22",
+     "extradata": {
+      "team1side": "blue",
+      "team2side": "red"
+     },
+     "opponents": [
+      {
+       "score": 1,
+       "stats": {
+        "kills": 18,
+        "towers": 9
+       },
+       "players": [
+        {
+         "player": "Zeus",
+         "character": "K'Sante"
+        },
+        {
+         "player": "Oner",
+         "character": "Lee Sin"
+        },
+        {
+         "player": "Faker",
+         "character": "Azir"
+        },
+        {
+         "player": "Gumayusi",
+         "character": "Varus"
+        },
+        {
+         "player": "Keria",
+         "character": "Rakan"
+        }
+       ]
+      },
+      {
+       "score": 0,
+       "stats": {
+        "kills": 9,
+        "towers": 3
+       },
+       "players": [
+        {},
+        {
+         "player": "Canyon",
+         "character": "Maokai"
+        },
+        {
+         "player": "Chovy",
+         "character": "Corki"
+        },
+        {
+         "player": "Ruler",
+         "character": "Jinx"
+        },
+        {
+         "player": "Duro",
+         "character": "Leona"
+        },
+        {
+         "player": "Kiin",
+         "character": "Renekton"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [
+      1,
+      0
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "28:05",
+     "extradata": {
+      "team1side": "blue",
+      "team2side": "red"
+     },
+     "opponents": [
+      {
+       "score": 1,
+       "stats": {
+        "kills": 22,
+        "towers": 9
+       },
+       "players": [
+        {
+         "player": "Zeus",
+         "character": "Rumble"
+        },
+        {
+         "player": "Oner",
+         "character": "Xin Zhao"
+        },
+        {
+         "player": "Faker",
+         "character": "Taliyah"
+        },
+        {
+         "player": "Gumayusi",
+         "character": "Ezreal"
+        },
+        {
+         "player": "Keria",
+         "character": "Alistar"
+        }
+       ]
+      },
+      {
+       "score": 0,
+       "stats": {
+        "kills": 12,
+        "towers": 3
+       },
+       "players": [
+        {},
+        {
+         "player": "Canyon",
+         "character": "Viego"
+        },
+        {
+         "player": "Chovy",
+         "character": "Sylas"
+        },
+        {
+         "player": "Ruler",
+         "character": "Aphelios"
+        },
+        {
+         "player": "Duro",
+         "character": "Braum"
+        },
+        {
+         "player": "Kiin",
+         "character": "Aatrox"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [
+      0,
+      1
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "2",
+     "length": "35:47",
+     "extradata": {
+      "team1side": "blue",
+      "team2side": "red"
+     },
+     "opponents": [
+      {
+       "score": 0,
+       "stats": {
+        "kills": 7,
+        "towers": 9
+       },
+       "players": [
+        {
+         "player": "Zeus",
+         "character": "Jax"
+        },
+        {
+         "player": "Oner",
+         "character": "Vi"
+        },
+        {
+         "player": "Faker",
+         "character": "Orianna"
+        },
+        {
+         "player": "Gumayusi",
+         "character": "Kai'Sa"
+        },
+        {
+         "player": "Keria",
+         "character": "Nautilus"
+        }
+       ]
+      },
+      {
+       "score": 1,
+       "stats": {
+        "kills": 15,
+        "towers": 3
+       },
+       "players": [
+        {},
+        {
+         "player": "Canyon",
+         "character": "Wukong"
+        },
+        {
+         "player": "Chovy",
+         "character": "Akali"
+        },
+        {
+         "player": "Ruler",
+         "character": "Zeri"
+        },
+        {
+         "player": "Duro",
+         "character": "Thresh"
+        },
+        {
+         "player": "Kiin",
+         "character": "Ornn"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [
+      1,
+      0
+     ],
+     "status": "",
+     "resulttype": "",
+     "winner": "1",
+     "length": "26:10",
+     "extradata": {
+      "team1side": "blue",
+      "team2side": "red"
+     },
+     "opponents": [
+      {
+       "score": 1,
+       "stats": {
+        "kills": 14,
+        "towers": 9
+       },
+       "players": [
+        {
+         "player": "Zeus",
+         "character": "Gnar"
+        },
+        {
+         "player": "Oner",
+         "character": "Sejuani"
+        },
+        {
+         "player": "Faker",
+         "character": "Ahri"
+        },
+        {
+         "player": "Gumayusi",
+         "character": "Xayah"
+        },
+        {
+         "player": "Keria",
+         "character": "Rell"
+        }
+       ]
+      },
+      {
+       "score": 0,
+       "stats": {
+        "kills": 4,
+        "towers": 3
+       },
+       "players": [
+        {},
+        {
+         "player": "Canyon",
+         "character": "Jarvan IV"
+        },
+        {
+         "player": "Chovy",
+         "character": "Yone"
+        },
+        {
+         "player": "Ruler",
+         "character": "Lucian"
+        },
+        {
+         "player": "Duro",
+         "character": "Nami"
+        },
+        {
+         "player": "Kiin",
+         "character": "Camille"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "map": "",
+     "scores": [],
+     "status": "notplayed",
+     "resulttype": "",
+     "winner": "",
+     "length": "",
+     "extradata": [],
+     "opponents": []
+    }
+   ]
+  }
+ ]
+}
