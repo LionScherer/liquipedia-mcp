@@ -8,6 +8,9 @@ All notable changes to this project are documented here. The format follows
 
 ### Added
 
+- Tolerant team names: a team lookup without results is retried once without affixes
+  ("FURIA Esports" -> "FURIA"); the opponent filter of `get_match_details` ignores
+  case, punctuation and such affixes.
 - `Opponent.live_score`: running series score of unfinished matches (only real values
   >= 0; `score` stays `None` until the match is finished).
 

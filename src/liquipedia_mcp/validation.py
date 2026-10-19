@@ -121,3 +121,36 @@ def parse_utc(value: str | datetime, what: str = "timestamp") -> datetime:
 def lpdb_datetime(dt: datetime) -> str:
     """Format a UTC datetime the way LPDB stores ``date`` values."""
     return dt.astimezone(UTC).strftime("%Y-%m-%d %H:%M:%S")
+
+
+# Words that people add to or drop from team names ("FURIA Esports" vs. Liquipedia's
+# "FURIA"). Only used to *find* a team after an exact lookup came back empty.
+_TEAM_AFFIXES = frozenset({"esports", "esport", "gaming", "team", "club", "gg"})
+
+
+def team_key(name: str) -> str:
+    """Comparison key for team names: case, punctuation and affixes like "Esports" are
+    ignored, so "FURIA Esports", "furia" and "FURIA" all give ``"furia"``."""
+    words = re.findall(r"[0-9a-z]+", name.casefold())
+    kept = [w for w in words if w not in _TEAM_AFFIXES]
+    return "".join(kept or words)
+
+
+def same_team(a: str, b: str) -> bool:
+    """True when two spellings most likely mean the same team."""
+    ka, kb = team_key(a), team_key(b)
+    if not ka or not kb:
+        return False
+    if ka == kb:
+        return True
+    short, long_ = sorted((ka, kb), key=len)
+    return len(short) >= 3 and long_.startswith(short)
+
+
+def shorter_team_name(name: str) -> str | None:
+    """``"FURIA Esports"`` → ``"FURIA"``; ``None`` when there is nothing to drop."""
+    tokens = name.split()
+    kept = [t for t in tokens if re.sub(r"[^0-9a-z]", "", t.casefold()) not in _TEAM_AFFIXES]
+    if kept and len(kept) < len(tokens):
+        return " ".join(kept)
+    return None

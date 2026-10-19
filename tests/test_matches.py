@@ -387,3 +387,29 @@ def test_placeholder_is_no_live_score():
     match = parse_match(load("rl_upcoming.json")["result"][0])
     assert match.opponent1.live_score is None
     assert match.opponent2.live_score is None
+
+
+def test_details_opponent_tolerates_suffixes(api, client):
+    """Live 19.10.2026: asked for "FURIA Esports", Liquipedia says "FURIA"."""
+    api.add("match", "lol_match_details.json")
+    for name in ("Gen.G Esports", "GEN.G", "Gen G"):
+        result = run(matches.get_match_details(client, "leagueoflegends", "T1", opponent=name))
+        assert len(result.matches) == 1, name
+
+
+def test_team_with_suffix_retries_short_name(api, client):
+    api.add("match", {"result": []}, contains="[[opponent::T1 Esports]]")
+    api.add("match", "lol_match_details.json", contains="[[opponent::T1]]")
+    result = run(matches.get_results(client, "leagueoflegends", team="T1 Esports", limit=1))
+    assert result.team == "T1"
+    assert len(result.matches) == 1
+    assert [c.params["conditions"] for c in api.calls] == [
+        "[[finished::1]] AND [[opponent::T1 Esports]]",
+        "[[finished::1]] AND [[opponent::T1]]",
+    ]
+
+
+def test_no_retry_when_found_or_nothing_to_drop(api, client):
+    api.add("match", {"result": []})
+    run(matches.get_results(client, "leagueoflegends", team="Fnatic"))
+    assert len(api.calls) == 1

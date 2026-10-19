@@ -44,6 +44,8 @@ from liquipedia_mcp.validation import (
     clamp,
     lpdb_datetime,
     parse_utc,
+    same_team,
+    shorter_team_name,
     validate_name,
     validate_tier,
     validate_wiki,
@@ -344,6 +346,10 @@ def _scope(
     return team, tournament, tier, parts
 
 
+def _replace_team(parts: list[str], name: str) -> list[str]:
+    return [f"[[opponent::{name}]]" if p.startswith("[[opponent::") else p for p in parts]
+
+
 def _now(now: datetime | None) -> datetime:
     return parse_utc(now) if now is not None else datetime.now(UTC)
 
@@ -362,15 +368,24 @@ async def get_results(
     wiki = validate_wiki(wiki)
     limit = clamp(limit, 1, MAX_MATCHES)
     team, tournament, tier, parts = _scope(team, tournament, max_tier, include_minor_types)
-    rows = await client.query(
-        "match",
-        wiki,
-        conditions=_conditions("[[finished::1]]", *parts),
-        fields=MATCH_FIELDS,
-        order="date DESC",
-        # With a tier filter, over-fetch so the client-side tier check can't empty the list.
-        limit=limit if tier is None else min(limit * 2 + 10, 200),
-    )
+
+    async def fetch(parts: list[str]) -> list[dict[str, Any]]:
+        return await client.query(
+            "match",
+            wiki,
+            conditions=_conditions("[[finished::1]]", *parts),
+            fields=MATCH_FIELDS,
+            order="date DESC",
+            # With a tier filter, over-fetch so the client-side tier check can't empty
+            # the list.
+            limit=limit if tier is None else min(limit * 2 + 10, 200),
+        )
+
+    rows = await fetch(parts)
+    if not rows and team and (short := shorter_team_name(team)):
+        # "FURIA Esports" is just "FURIA" on Liquipedia: one more request, only on a miss.
+        team, parts = short, _replace_team(parts, short)
+        rows = await fetch(parts)
     matches, omitted, picks = parse_matches(
         rows, wiki, limit, max_tier=tier, include_minor_types=include_minor_types
     )
@@ -403,15 +418,22 @@ async def get_upcoming(
     limit = clamp(limit, 1, MAX_MATCHES)
     team, tournament, tier, parts = _scope(team, tournament, max_tier, include_minor_types)
     start = _now(now)
-    rows = await client.query(
-        "match",
-        wiki,
-        conditions=_conditions("[[finished::0]]", f"[[date::>{lpdb_datetime(start)}]]", *parts),
-        fields=MATCH_FIELDS,
-        order="date ASC",
-        # Over-fetch so that dropping TBD pairings still leaves `limit` matches.
-        limit=min(limit * 2 + 10, 200),
-    )
+
+    async def fetch(parts: list[str]) -> list[dict[str, Any]]:
+        return await client.query(
+            "match",
+            wiki,
+            conditions=_conditions("[[finished::0]]", f"[[date::>{lpdb_datetime(start)}]]", *parts),
+            fields=MATCH_FIELDS,
+            order="date ASC",
+            # Over-fetch so that dropping TBD pairings still leaves `limit` matches.
+            limit=min(limit * 2 + 10, 200),
+        )
+
+    rows = await fetch(parts)
+    if not rows and team and (short := shorter_team_name(team)):
+        team, parts = short, _replace_team(parts, short)
+        rows = await fetch(parts)
     matches, omitted, _ = parse_matches(
         rows,
         wiki,
@@ -548,23 +570,31 @@ async def get_match_details(
     team = validate_name(team, "team")
     opponent = validate_name(opponent, "opponent") if opponent else None
     limit = clamp(limit, 1, PICKS_MAX_MATCHES)
-    rows = await client.query(
-        "match",
-        wiki,
-        conditions=_conditions("[[finished::1]]", f"[[opponent::{team}]]"),
-        fields=MATCH_FIELDS,
-        order="date DESC",
-        # Filtering by opponent happens locally, so look a bit further back.
-        limit=30 if opponent else limit,
-    )
+
+    async def fetch(name: str) -> list[dict[str, Any]]:
+        return await client.query(
+            "match",
+            wiki,
+            conditions=_conditions("[[finished::1]]", f"[[opponent::{name}]]"),
+            fields=MATCH_FIELDS,
+            order="date DESC",
+            # Filtering by opponent happens locally, so look a bit further back.
+            limit=30 if opponent else limit,
+        )
+
+    rows = await fetch(team)
+    if not rows and (short := shorter_team_name(team)):
+        team = short
+        rows = await fetch(team)
     if opponent:
-        wanted = opponent.casefold()
+        # Tolerant on purpose: users say "FURIA Esports", Liquipedia says "FURIA".
         rows = [
             r
             for r in rows
             if any(
-                (to_str(to_dict(o).get("name")) or "").casefold() == wanted
+                not same_team(name, team) and same_team(name, opponent)
                 for o in to_list(r.get("match2opponents"))
+                if (name := to_str(to_dict(o).get("name")))
             )
         ]
     matches, omitted, _ = parse_matches(rows, wiki, limit, include_picks=True)

@@ -7,6 +7,8 @@ from liquipedia_mcp.validation import (
     clamp,
     lpdb_datetime,
     parse_utc,
+    same_team,
+    shorter_team_name,
     validate_name,
     validate_tier,
     validate_wiki,
@@ -121,3 +123,27 @@ def test_parse_utc():
     for bad in ("yesterday", "2026-13-01", "]] OR [[", 12):
         with pytest.raises(InvalidInputError):
             parse_utc(bad)  # type: ignore[arg-type]
+
+
+@pytest.mark.parametrize(
+    ("a", "b", "same"),
+    [
+        ("FURIA Esports", "FURIA", True),
+        ("furia", "FURIA Esports", True),
+        ("Team Liquid", "Liquid", True),
+        ("Gen.G", "Gen.G Esports", True),
+        ("Karmine Corp", "Karmine", True),
+        ("T1", "T1 Academy", False),
+        ("G2 Esports", "Gen.G", False),
+        ("Cloud9", "FURIA", False),
+    ],
+)
+def test_same_team(a, b, same):
+    assert same_team(a, b) is same
+
+
+def test_shorter_team_name():
+    assert shorter_team_name("FURIA Esports") == "FURIA"
+    assert shorter_team_name("Team Liquid") == "Liquid"
+    assert shorter_team_name("Fnatic") is None
+    assert shorter_team_name("Team") is None

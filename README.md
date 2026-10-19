@@ -226,6 +226,10 @@ Discovered against real LPDB answers (Rocket League and League of Legends, Julyâ
   Tables exist before the first match with placements 1..n; those are reported as "not
   started". Only `definitestatus` is used (`currentstatus` is "down" for everyone before
   the start). Bo1 Swiss stages keep game records at 0â€“0; then only match records are shown.
+- Team names are matched exactly by LPDB, but people say "FURIA Esports" where
+  Liquipedia says "FURIA". When a team lookup finds nothing, it is retried once
+  without affixes like "Esports"/"Gaming"/"Team", and the opponent filter of
+  `get_match_details` compares names the same tolerant way.
 - For team standings, the current phase is the played one with the latest end date, not
   the highest page id (which picked a January cup over a September league).
 
