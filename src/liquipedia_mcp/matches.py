@@ -209,8 +209,12 @@ def parse_match(
         return None
     finished = to_bool(row.get("finished"))
     if not finished:
-        # Placeholder or partial scores of unfinished matches are not results.
-        op1.score = op2.score = None
+        # Placeholder or partial scores of unfinished matches are not results. A real
+        # partial score is kept apart as ``live_score`` for consumers that show
+        # running series.
+        for op in (op1, op2):
+            op.live_score = op.score if op.score is not None and op.score >= 0 else None
+            op.score = None
 
     winner_name: str | None = None
     if finished:

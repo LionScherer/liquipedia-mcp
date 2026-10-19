@@ -8,6 +8,9 @@ All notable changes to this project are documented here. The format follows
 
 ### Added
 
+- `Opponent.live_score`: running series score of unfinished matches (only real values
+  >= 0; `score` stays `None` until the match is finished).
+
 - `LiquipediaClient` for the LPDB v3 API (`match`, `standingstable`, `standingsentry`)
   with a 60 requests/hour sliding-window budget (can only be lowered), a lockout after
   HTTP 429, no automatic retries, a size-bounded TTL cache with negative caching,

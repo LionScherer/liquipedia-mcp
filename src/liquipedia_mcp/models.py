@@ -53,6 +53,10 @@ class Opponent(_Serializable):
     status: str | None = None
     """LPDB opponent status if it is not a plain score, e.g. ``"W"``/``"FF"``/``"DQ"``."""
     players: list[str] = field(default_factory=list)
+    live_score: int | None = None
+    """Running series score of a match that is not finished yet (``score`` stays
+    ``None`` there). Only set when LPDB has a real value (>= 0); it can still be a
+    0 placeholder for a match that has not begun, so check the start time first."""
 
 
 @dataclass

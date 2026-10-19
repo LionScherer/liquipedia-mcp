@@ -370,3 +370,20 @@ def test_full_request_marks_more(api, client):
     result = run(matches.get_matches_between(client, "rocketleague", "2026-10-19", "2026-10-21"))
     assert result.truncated
     assert result.truncated_more
+
+
+def test_running_series_keeps_live_score_but_no_result():
+    row = load("rl_upcoming.json")["result"][0]
+    row["match2opponents"][0]["score"] = 2
+    row["match2opponents"][1]["score"] = 1
+    match = parse_match(row)
+    assert not match.finished
+    assert (match.opponent1.score, match.opponent2.score) == (None, None)
+    assert (match.opponent1.live_score, match.opponent2.live_score) == (2, 1)
+    assert match.winner_name is None
+
+
+def test_placeholder_is_no_live_score():
+    match = parse_match(load("rl_upcoming.json")["result"][0])
+    assert match.opponent1.live_score is None
+    assert match.opponent2.live_score is None
